@@ -3,7 +3,16 @@ import Mathlib.Data.Real.Basic
 
 namespace C03S01
 
-#check ∀ x : ℝ, 0 ≤ x → |x| = x
+variable (x : ℝ) (f : 0 ≤ x)
+
+
+theorem h : ∀ x : ℝ, 0 ≤ x → |x| = x := by
+  intro x f
+  exact abs_of_nonneg f
+
+
+
+#check h x f
 
 #check ∀ x y ε : ℝ, 0 < ε → ε ≤ 1 → |x| < ε → |y| < ε → |x * y| < ε
 
