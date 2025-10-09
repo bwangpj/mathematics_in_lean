@@ -6,9 +6,8 @@ namespace C03S01
 variable (x : ℝ) (f : 0 ≤ x)
 
 
-theorem h : ∀ x : ℝ, 0 ≤ x → |x| = x := by
-  intro x f
-  exact abs_of_nonneg f
+theorem h : ∀ x : ℝ, 0 ≤ x → |x| = x :=
+  fun x f ↦ abs_of_nonneg f
 
 
 
@@ -51,7 +50,7 @@ theorem my_lemma4 :
     ∀ {x y ε : ℝ}, 0 < ε → ε ≤ 1 → |x| < ε → |y| < ε → |x * y| < ε := by
   intro x y ε epos ele1 xlt ylt
   calc
-    |x * y| = |x| * |y| := sorry
+    |x * y| = |x| * |y| := abs_mul x y
     _ ≤ |x| * ε := sorry
     _ < 1 * ε := sorry
     _ = ε := sorry
@@ -114,6 +113,12 @@ example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f x + g x :=
 
 example {c : ℝ} (mf : Monotone f) (nnc : 0 ≤ c) : Monotone fun x ↦ c * f x :=
   sorry
+
+variable (f : ℝ → ℝ) (hf : Monotone f)
+
+variable (a b : ℝ) (h : a ≤ b)
+
+#check hf h 
 
 example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f (g x) :=
   sorry

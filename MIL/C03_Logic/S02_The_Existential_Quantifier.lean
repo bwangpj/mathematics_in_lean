@@ -15,15 +15,19 @@ example : ∃ x : ℝ, 2 < x ∧ x < 3 := by
   use 5 / 2, h1, h2
 
 example : ∃ x : ℝ, 2 < x ∧ x < 3 := by
-  have h : 2 < (5 : ℝ) / 2 ∧ (5 : ℝ) / 2 < 3 := by norm_num
+  have h : 2 < 5 / 2 ∧ 5 / 2 < 3 := by sorry
   use 5 / 2
 
 example : ∃ x : ℝ, 2 < x ∧ x < 3 :=
   have h : 2 < (5 : ℝ) / 2 ∧ (5 : ℝ) / 2 < 3 := by norm_num
   ⟨5 / 2, h⟩
 
-example : ∃ x : ℝ, 2 < x ∧ x < 3 :=
-  ⟨5 / 2, by norm_num⟩
+example (y : ℝ) (h : ∃ x : ℝ, y = 2*x) : 1=1 ∧ 2=2 := by
+  constructor
+  · sorry
+  · sorry
+
+
 
 def FnUb (f : ℝ → ℝ) (a : ℝ) : Prop :=
   ∀ x, f x ≤ a
