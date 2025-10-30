@@ -44,7 +44,12 @@ example : s ∩ (t ∪ u) ⊆ s ∩ t ∪ s ∩ u := by
   · right; exact ⟨xs, xu⟩
 
 example : s ∩ t ∪ s ∩ u ⊆ s ∩ (t ∪ u) := by
-  sorry
+  intro x hx
+  rcases hx with (hx1 | hx2)
+  · rcases hx1 with ⟨hx11, hx12⟩
+    exact ⟨hx11, mem_union_left u hx12⟩
+  · sorry
+
 example : (s \ t) \ u ⊆ s \ (t ∪ u) := by
   intro x xstu
   have xs : x ∈ s := xstu.1.1
@@ -214,7 +219,14 @@ example : (⋂ p ∈ primes, { x | ¬p ∣ x }) ⊆ { x | x = 1 } := by
   apply Nat.exists_prime_and_dvd
 
 example : (⋃ p ∈ primes, { x | x ≤ p }) = univ := by
-  sorry
+  refine eq_univ_iff_forall.mpr ?_
+  intro x
+  refine mem_iUnion₂.mpr ?_
+  choose p hp using Nat.exists_infinite_primes x
+  rcases hp with ⟨hp1,hp2⟩
+  use p
+  use hp2
+  exact hp1
 
 end
 
@@ -235,4 +247,3 @@ example : ⋂₀ s = ⋂ t ∈ s, t := by
   rfl
 
 end
-
